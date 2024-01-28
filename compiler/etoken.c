@@ -165,17 +165,29 @@ Token* getNextToken(Tokenizer* tokenizer) {
 }
 
 
-
-
 int tokenM(const char* inputy, Token*** tokenlist) {
     Tokenizer* tokenizer = createTokenizer(inputy);
 
-    // Initialize variables
     int numTokens = 0;
     int maxTokens = 100; 
     *tokenlist = (Token**)malloc(maxTokens * sizeof(Token*));
 
-    // Tokenize input
+    const char* tokenTypeText[] = {
+        "NumericLiteral",
+        "TextLiteral",
+        "Separator",
+        "Operator",
+        "Identifier",
+        "Keyword",
+        "EOL",
+        "Newline",
+        "RParenth",
+        "RBracket",    
+        "LBracket",
+        "LParenth",
+        "None"
+    };
+
     Token* token = getNextToken(tokenizer);
     while (token->type != EOL) {
         if (numTokens >= maxTokens) {
@@ -191,6 +203,15 @@ int tokenM(const char* inputy, Token*** tokenlist) {
         *tokenlist = (Token**)realloc(*tokenlist, maxTokens * sizeof(Token*));
     }
     (*tokenlist)[numTokens++] = createToken(EOL, "");
+
+    printf("Tokens:\n[");
+    for (int i = 0; i < numTokens; i++) {
+        printf("{Type=%s, Value='%s'}", tokenTypeText[(*tokenlist)[i]->type], (*tokenlist)[i]->value);
+        if (i < numTokens - 1) {
+            printf(", ");
+        }
+    }
+    printf("]\n");
 
     destroyTokenizer(tokenizer);
 

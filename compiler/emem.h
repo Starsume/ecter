@@ -3,6 +3,9 @@
 
 #define ECTER_COMPILER
 
+#include <stdlib.h>
+#include <stdint.h>
+
 #define POOL_SIZE 10000
 
 typedef struct {
@@ -13,6 +16,7 @@ typedef struct {
 void meminit();
 void* alloc(size_t size);
 void memfree(void* ptr);
-void getAddress()
+void getAddress(void* ptr);
+void reall(void* ptr);
 
 #endif

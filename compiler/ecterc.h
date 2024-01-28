@@ -9,4 +9,6 @@ typedef struct {
     struct tm *tm = localtime(&t);
 } CompilerInstance;
 
+void stop(CompilerInstance inst);
+
 #endif

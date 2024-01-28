@@ -1,35 +1,71 @@
 #define ECTER_COMPILER
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <cstdlib>
+#include "emem.h"
+#include "ecterc.h"
 #include "etoken.c"
 
-const char* tokenTypeNames[] = {
-    "NumericLiteral",
-    "TextLiteral",
-    "Separator",
-    "Operator",
-    "Identifier",
-    "Keyword",
-    "EOL",
-    "Newline",
-    "RParenth",
-    "RBracket",    
-    "LBracket",
-    "LParenth",
-    "None"
-};
+
 
 int main(int argc, char* argv[]) {
-    const char* input = "class waiting() { int hard = 0 }";
-    Token** tokenlist;
-    int numTokens = tokenM(input, &tokenlist);
-
-    printf("Tokens:\n");
-    for (int i = 0; i < numTokens; i++) {
-        printf("Token %d: Type=%s, Value='%s'\n", i + 1, tokenTypeNames[tokenlist[i]->type], strcmp(tokenlist[i]->value, "\n") == 0 ? "\\n" : tokenlist[i]->value);
-        destroyToken(tokenlist[i]);
+    if (argc != 2) {
+        printf("Usage: %s <filename>\n", argv[0]);
+        return 1;
     }
-    free(tokenlist);
+
+    const char *filename = argv[1];
+    FILE *file = fopen(filename, "r");
+    if (!file) {
+        printf("Error: Unable to open file %s\n", filename);
+        return 1;
+    }
+
+    fseek(file, 0, SEEK_END);
+    long fileSize = ftell(file);
+    fseek(file, 0, SEEK_SET);
+
+    char *sourceCode = (char *)alloc(fileSize + 1);
+    if (!sourceCode) {
+        printf("Error: Memory allocation failed\n");
+        fclose(file);
+        return 1;
+    }
+
+    size_t bytesRead = fread(sourceCode, 1, fileSize, file);
+    if (bytesRead != fileSize) {
+        printf("Error: Failed to read file %s\n", filename);
+        fclose(file);
+        free(sourceCode);
+        return 1;
+    }
+    sourceCode[fileSize] = '\0';
+
+    Token **tokens;
+    int numTokens = tokenM(sourceCode, &tokens);
+
+    if (numTokens == 0) {
+        printf("Error: Failed to tokenize input\n");
+        free(sourceCode);
+        return 1;
+    }
+
+    printf("Tokens:\n[");
+    for (int i = 0; i < numTokens; i++) {
+        printf("{Type=%d, Value='%s'}", tokens[i]->type, tokens[i]->value);
+        if (i < numTokens - 1) {
+            printf(", ");
+        }
+    }
+    printf("]\n");
+
+    // Free allocated memory
+    free(sourceCode);
+    for (int i = 0; i < numTokens; i++) {
+        destroyToken(tokens[i]);
+    }
+    free(tokens);
 
     return 0;
 }

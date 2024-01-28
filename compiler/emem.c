@@ -27,3 +27,11 @@ void memfree(void* ptr) {
         pool.next_free_index = (uint32_t)((uint8_t*)ptr - pool.data);
     }
 }
+
+void getAddress(void* ptr) {
+    return &ptr;
+}
+
+void reall(void* ptr) {
+
+}

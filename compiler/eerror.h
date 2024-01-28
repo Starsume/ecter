@@ -29,5 +29,6 @@ typedef struct {
 Error createError(char name[], char cause[], Position pos);
 ErrorType getErrorType(Error err);
 Error[] handleError(char* path[] = "", char* tokenlist[] = "", ErrorHandler handler);
+void reportError(Error err);
 
 #endif
