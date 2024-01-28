@@ -7,7 +7,15 @@
 #include "ecterc.h"
 #include "etoken.c"
 
+extern const CompilerInstance instance;
 
+void stop(CompilerInstance inst) {
+    exit(0);
+}
+
+void checkArguments() {
+
+}
 
 int main(int argc, char* argv[]) {
     if (argc != 2) {
