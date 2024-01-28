@@ -1,0 +1,33 @@
+--This is a comment
+
+import(test.etc) -- importing
+import(IO) -- importing system files
+
+function Main() {
+    print("Hello World!") -- hello world function
+}
+
+int a = 2 --integer
+string b = "sample text" --string
+float c --float without value
+
+class Car() { --example class
+    function new(id, brand) {
+        int id = id
+        string brand = brand
+    }    
+}
+
+mycar = Car.new(11, "Ford")
+
+accesible class Animal() { -- public class
+    
+}
+
+internal class Lion:Animal() { -- private class with implementation
+
+}
+
+function main() -> int { -- returns int
+    return 0
+}

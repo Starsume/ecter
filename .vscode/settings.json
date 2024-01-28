@@ -1,0 +1,24 @@
+{
+    "C_Cpp.errorSquiggles": "disabled",
+    "files.associations": {
+        "*.c": "c",
+        "stdio.h": "c",
+        "token.h": "c",
+        "ctype.h": "c",
+        "stdlib.h": "c",
+        "bit": "c",
+        "cctype": "c",
+        "cmath": "c",
+        "compare": "c",
+        "concepts": "c",
+        "cstdio": "c",
+        "cstdlib": "c",
+        "cstring": "c",
+        "type_traits": "c",
+        "limits": "c",
+        "new": "c",
+        "*.tcc": "c",
+        "cstdint": "c",
+        "typeinfo": "c"
+    }
+}
