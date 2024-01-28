@@ -2,6 +2,9 @@
 #define EERROR_H
 
 #define ECTER_COMPILER
+#include "ecterc.h"
+#include "etoken.h"
+#include <stdio.h>
 
 typedef struct {
     int line;
@@ -19,7 +22,12 @@ typedef enum ErrorType {
     TypeError,
 };
 
+typedef struct {
+    CompilerInstance instance;
+} ErrorHandler;
+
 Error createError(char name[], char cause[], Position pos);
 ErrorType getErrorType(Error err);
+Error[] handleError(char* path[] = "", char* tokenlist[] = "", ErrorHandler handler);
 
 #endif

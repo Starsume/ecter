@@ -19,6 +19,8 @@
         "new": "c",
         "*.tcc": "c",
         "cstdint": "c",
-        "typeinfo": "c"
+        "typeinfo": "c",
+        "ecterc.h": "c",
+        "random": "c"
     }
 }
