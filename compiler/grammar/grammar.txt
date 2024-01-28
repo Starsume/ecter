@@ -1,0 +1,63 @@
+<source_code> ::= <import_statement>* <function_declaration>*
+
+<import_statement> ::= "import" "(" <filename> ")"
+
+<function_declaration> ::= "function" <function_name> "(" <parameter_list> ")" "{" <statement>* "}"
+
+<parameter_list> ::= <parameter> ("," <parameter>)* | ε
+
+<parameter> ::= <type> <identifier>
+
+<type> ::= "int" | "long" | "decimal" | "string" | "float" | "bool" | "char" | <class_name>
+
+<class_name> ::= <identifier> ("::" <identifier>)*
+
+<statement> ::= <variable_declaration> | <assignment_statement> | <function_call> | <class_declaration> | <return_statement>
+
+<variable_declaration> ::= <type> <identifier> ("=" <expression>)?
+
+<assignment_statement> ::= <identifier> "=" <expression>
+
+<function_call> ::= <identifier> ("." <function_name> "(" <argument_list> ")")?
+
+<argument_list> ::= <expression> ("," <expression>)* | ε
+
+<class_declaration> ::= ("accessible" | "internal" | "abstract" | "override")? "class" <class_name> "(" ")" "{" <class_body> "}"
+
+<class_body> ::= <function_declaration>*
+
+<return_statement> ::= "return" <expression>
+
+<expression> ::= <literal> | <identifier> | <function_call>
+
+<literal> ::= <numeric_literal> | <string_literal> | <boolean_literal> | <char_literal>
+
+<numeric_literal> ::= <integer_literal> | <long_literal> | <decimal_literal> | <float_literal>
+
+<integer_literal> ::= <digit>+
+
+<long_literal> ::= <digit>+
+
+<decimal_literal> ::= <digit>+ "." <digit>+
+
+<float_literal> ::= <digit>+ "." <digit>+
+
+<string_literal> ::= "\"" <character>* "\""
+
+<boolean_literal> ::= "true" | "false"
+
+<char_literal> ::= "'" <character> "'"
+
+<function_name> ::= <identifier>
+
+<identifier> ::= <letter> (<letter> | <digit> | "_")*
+
+<filename> ::= <string_literal>
+
+<comment> ::= "--" <character>*
+
+<letter> ::= [A-Za-z]
+
+<digit> ::= [0-9]
+
+<character> ::= Any printable ASCII character

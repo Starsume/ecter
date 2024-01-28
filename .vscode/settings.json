@@ -21,6 +21,12 @@
         "cstdint": "c",
         "typeinfo": "c",
         "ecterc.h": "c",
-        "random": "c"
+        "random": "c",
+        "optional": "c",
+        "system_error": "c",
+        "array": "c",
+        "functional": "c",
+        "tuple": "c",
+        "utility": "c"
     }
 }

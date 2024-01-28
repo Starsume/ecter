@@ -8,8 +8,13 @@ function Main() {
 }
 
 int a = 2 --integer
+long l = 3476573485634 --long
+decimal m = 347.553
 string b = "sample text" --string
 float c --float without value
+bool boo = true
+char d = 'D' -- char 
+
 
 class Car() { --example class
     function new(id, brand) {
@@ -24,7 +29,15 @@ accesible class Animal() { -- public class
     
 }
 
-internal class Lion:Animal() { -- private class with implementation
+internal class Lion::Animal() { -- private class with implementation
+
+}
+
+abstract class Engine() { -- abstract class
+
+}
+
+function size(T object) -> T { -- lambda function
 
 }
 
