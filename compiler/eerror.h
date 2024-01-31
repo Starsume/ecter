@@ -23,12 +23,15 @@ typedef enum ErrorType {
 };
 
 typedef struct {
+    int errorc;
+    Error* errors;
     CompilerInstance instance;
 } ErrorHandler;
 
-Error createError(char name[], char cause[], Position pos);
+ErrorHandler createHandler();
+Error createError(char name*, char cause*, Position pos);
 ErrorType getErrorType(Error err);
-Error[] handleError(char* path[] = "", char* tokenlist[] = "", ErrorHandler handler);
+Error* checkForErrors()
 void reportError(Error err);
 
 #endif

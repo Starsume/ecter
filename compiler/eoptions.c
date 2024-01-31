@@ -3,8 +3,12 @@
 
 #define ECTER_COMPILER
 
-const* char options = {""};
+#include "eoptions.h"
 
+const char* options;
 
+bool validateOption(Options option) {
+
+}
 
 #endif

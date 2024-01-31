@@ -3,9 +3,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <cstdlib>
+
 #include "emem.h"
+#include "eoptions.h"
 #include "ecterc.h"
-#include "etoken.c"
+#include "etoken.h"
 
 extern const CompilerInstance instance;
 
@@ -13,8 +15,19 @@ void stop(CompilerInstance inst) {
     exit(0);
 }
 
-void checkArguments() {
+void checkArguments(char* args[]) {
+    Options* optionist;
+    int optionsize = sizeof(optionist);
 
+    for(int z=0;z<optionsize;z++) {
+        optionist[z] = createOption();
+    }
+
+    int size = sizeof(args[]);
+
+    for(int x=0;x<size;x++) {
+        validateOption();
+    }
 }
 
 int main(int argc, char* argv[]) {
