@@ -15,7 +15,19 @@ Options createOption(char* option) {
 }
 
 bool validateOption(Options option) {
-    
+    for (int i = 0; i < option.optionc; i++) {
+        bool valid = false;
+        for (int j = 0; j < sizeof(ValidOptions) / sizeof(ValidOptions[0]); j++) {
+            if (strcmp(option.options[i], ValidOptions[j]) == 0) {
+                valid = true;
+                break;
+            }
+        }
+        if (!valid) {
+            return false;
+        }
+    }
+    return true;
 }
 
 #endif
