@@ -16,7 +16,7 @@ typedef struct {
     char* options;
 } Options;
 
-Options createOption();
+Options createOption(char* option);
 bool validateOption(Options option);
 
 #endif

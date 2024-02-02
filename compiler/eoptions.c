@@ -7,8 +7,15 @@
 
 const char* options;
 
-bool validateOption(Options option) {
+Options createOption(char* option) {
+    Options opt;
+    opt->options = option;
+    opt->optionc = (int)sizeof(option);
+    return opt;
+}
 
+bool validateOption(Options option) {
+    
 }
 
 #endif
