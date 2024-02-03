@@ -3,13 +3,7 @@
 
 #define ECTER_COMPILER
 
-const char[] ValidOptions = {
-    "-h", "--help",
-    "-o", "--object",
-    "-s", "--assembly",
-    "-d", "--debug",
-    "--version"
-};
+extern const char* ValidOptions; 
 
 typedef struct {
     int optionc = 0;

@@ -11,6 +11,15 @@
 
 extern const CompilerInstance instance;
 
+extern const char* ValidOptions = {
+    "-h", "--help",
+    "-o", "--object",
+    "-s", "--assembly",
+    "-d", "--debug",
+    "-l", "--log",
+    "--version"
+};
+
 void stop(CompilerInstance inst) {
     exit(0);
 }
@@ -20,13 +29,13 @@ void checkArguments(char* args[]) {
     int optionsize = sizeof(optionist);
 
     for(int z=0;z<optionsize;z++) {
-        optionist[z] = createOption();
+        optionist[z] = createOption(args[z]);
     }
 
     int size = sizeof(args[]);
 
     for(int x=0;x<size;x++) {
-        validateOption();
+        validateOption(optionist[x]);
     }
 }
 
