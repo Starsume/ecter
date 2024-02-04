@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 
 #include "include\emem.h"
 #include "include\eoptions.h"
@@ -15,6 +16,8 @@
 #define ECTER_VERSION_MAJOR 0
 #define ECTER_VERSION_BUILD 7
 #define ECTER_VERSION "Ecter " + std::to_string(ECTER_VERSION_MAJOR) + "." + std::to_string(ECTER_VERSION_MINOR) + "." + std::to_string(ECTER_VERSION_BUILD)
+
+using namespace std;
 
 /* Operating System defintion */
 
@@ -38,27 +41,23 @@ const char* ValidOptions[] = {
 };
 
 void stop(std::string& reason) {
-
     exit(1);
 }
 
-void checkArguments(char* args[]) {
-    Options* optionist;
-    int optionsize = sizeof(optionist);
+void checkArguments(char* args[], int argc) {
+    std::vector<Options> optionist(argc); 
 
-    for(int z=0;z<optionsize;z++) {
-        optionist[z] = createOption(args[z]);
+    for(int z = 0; z < argc; z++) {
+        optionist[z] = createOption(args[z]); 
     }
 
-    int size = sizeof(args[]);
-
-    for(int x=0;x<size;x++) {
-        validateOption(optionist[x]);
+    for(int x = 0; x < argc; x++) {
+        validateOption(optionist[x]); 
     }
 }
 
 int main(int argc, char* argv[]) {
     if (argc <= 6) {
-        checkArguments(argv[]);
+        checkArguments(argv);
     }
 }   

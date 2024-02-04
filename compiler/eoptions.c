@@ -9,8 +9,8 @@ const char* options;
 
 Options createOption(char* option) {
     Options opt;
-    opt->options = option;
-    opt->optionc = (int)sizeof(option);
+    opt.options = option;
+    opt.optionc = (int)sizeof(option);
     return opt;
 }
 

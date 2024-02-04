@@ -3,10 +3,13 @@
 
 #define ECTER_COMPILER
 
-typedef struct {
-    int optionc = 0;
-    char* options;
-} Options;
+#include <vector>
+
+class Options {
+    public:
+        
+        std::vector<std::string> options(optionc);
+};
 
 Options createOption(char* option);
 bool validateOption(Options option);
