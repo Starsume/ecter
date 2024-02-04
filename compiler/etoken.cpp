@@ -1,52 +1,11 @@
 #define ECTER_COMPILER
 
-#include "etoken.h"
+#include "compiler/etoken.h"
 #include <cstdlib>
 #include <vector>
 #include <cstring>
 #include <cctype>
-
-Token::Token(TokenType type, const char* value) {
-    this->type = type;
-    this->value = strdup(value);
-}
-
-Token::~Token() {
-    free(value);
-}
-
-int isKeyword(const char* word) {
-    const char* keywords[11] = {
-        "class",
-        "accesible",
-        "abstract",
-        "while",
-        "if",
-        "for",
-        "internal",
-        "function",
-        "return",
-        "import",
-        "const",
-        "static"
-    };
-
-    for (int i = 0; i < 11; i++) {
-        if (strcmp(word, keywords[i]) == 0) {
-            return 1;
-        }
-    }
-    return 0;
-}
-
-Tokenizer::Tokenizer(const char* input) {
-    this->input = strdup(input);
-    position = 0;
-}
-
-Tokenizer::~Tokenizer() {
-    free(input);
-}
+#include <iostream>
 
 char Tokenizer::currentChar() {
     if (input[position] != '\0') {
@@ -101,8 +60,11 @@ Token* Tokenizer::extractKeywordOrIdentifier() {
     while (isalnum(currentChar()) || currentChar() == '_') {
         advance();
     }
-    char* word = strndup(input + index, position - index);
+    char* word = new char[position - index + 1];
+    strncpy(word, input + index, position - index);
+    word[position - index] = '\0';
     TokenType type = isKeyword(word) ? Keyword : Identifier;
+
     return new Token(type, word);
 }
 
@@ -172,7 +134,7 @@ Token* Tokenizer::getNextToken() {
 std::vector<Token*> tokenM(const std::string code) {
     std::vector<Token*> tokens;
 
-    Tokenizer tokenizer(code);
+    Tokenizer tokenizer(code.c_str());
 
     Token* token;
     while((token = tokenizer.getNextToken()) != nullptr) {
@@ -180,4 +142,20 @@ std::vector<Token*> tokenM(const std::string code) {
     }
 
     return tokens;
+}
+
+int main() {
+    std::string code = "int ut = 10";
+    std::vector<Token*> tokens = tokenM(code);
+
+    for (Token* token : tokens) {
+        std::cout << token->getValue() << " ";
+    }
+    std::cout << std::endl;
+
+    for (Token* token : tokens) {
+        delete token;
+    }
+    
+    return 0;
 }

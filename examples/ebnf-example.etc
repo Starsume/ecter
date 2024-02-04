@@ -1,0 +1,82 @@
+--This is a comment
+
+@import(test.etc) -- importing
+@import(math) -- importing system files
+
+function Main() {
+    print("Hello World!") -- hello world function
+}
+
+int a = 2 --integer
+long l = 3476573485634 --long
+decimal m = 347.553
+string b = "sample text" --string
+float c --float without value
+bool boo = true -- bool
+char d = 'D' -- char 
+list<string> l[] -- list of strings
+
+
+class Car() { --example class
+    function new(int id, string brand) {
+        int id = id
+        string brand = brand
+    }    
+}
+
+mycar = Car.new(11, "Ford")
+
+accesible class Animal() { -- public class
+    
+}
+
+internal class Lion::Animal() { -- private class with implementation
+
+}
+
+abstract class Engine() { -- abstract class
+
+}
+
+function size(T object) -> int { -- lambda function
+
+}
+
+function main() -> int { -- returns int
+    return 0
+}
+
+
+
+protected class it() { --Example with override
+    function new(int i) {
+        int i = i
+    }
+
+    function sample() {
+        --its protected but new() isn't
+    }
+}
+
+it sm = it.new(1)
+sm.sample() --error
+
+accesible class sed::it() {
+    function new(int i) {
+        int i = i
+    }
+
+    function sample() {
+
+    }
+}
+
+sed des = sed.new(4)
+des.sample() --now its accesible
+
+---
+Multiline
+Comments
+---
+
+--Rule: every class should have a new() function. if not you get an error

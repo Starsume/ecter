@@ -3,6 +3,9 @@
 
 #define ECTER_COMPILER
 
+#include <cstddef>
+#include <string>
+
 enum TokenType {
     NumericLiteral,
     TextLiteral,
@@ -20,9 +23,27 @@ enum TokenType {
     None
 };
 
-struct Token {
-    enum TokenType type;
-    char* value;
+class Position {
+    public:
+        Position() {
+            int row;
+            int column;
+        }
+};
+
+class Token {
+    public:
+        Token(TokenType t, const char* v) : type(t) {
+            TokenType type;
+            char* value;
+        }
+
+        TokenType type;
+        char* value;
+
+        ~Token() {
+            free(value);
+        }
 };
 
 int isKeyword(const char* word);
