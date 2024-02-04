@@ -2,18 +2,19 @@
 #define EERROR_H
 
 #define ECTER_COMPILER
-#include "ecterc.h"
-#include "etoken.h"
-#include <stdio.h>
+#include "\ecterc.h"
+#include "\etoken.h"
+#include <iostream>
 
 /* Codes */
 #define OK_CODE 0
 #define ERROR_CODE 1
 
-typedef struct {
-    int line;
-    int character;
-} Position;
+class Position {
+    public:
+        int line;
+        int character;
+};
 
 typedef struct {
     char* name[];

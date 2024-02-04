@@ -1,8 +1,8 @@
 #define ECTER_COMPILER
 
-#include "eerror.h"
-#include "ecterc.h"
-#include "etoken.h"
+#include "include\eerror.h"
+#include "include\ecterc.h"
+#include "include\etoken.h"
 #include <stdio.h>
 
 Error createError(char n[], char c[], Position pos) {

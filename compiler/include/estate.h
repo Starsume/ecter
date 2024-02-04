@@ -3,7 +3,13 @@
 
 #define ECTER_COMPILER
 
-std::string validStates[] = {"Compiling", "Idle"};
+enum class States {
+    Idle,
+    Compiling,
+    Assembling,
+    Finished,
+    Error
+};
 
 class State {
     public:
@@ -11,12 +17,21 @@ class State {
             current_state = "Idle"
         }
 
-        std::string getState() const {
-            return current_state;
-        }
+        std::string getState() const;
 
-        void setState(const std::string state) {
-            current_state = state;
+        void setState(const std::string state);
+
+        bool validateState(States state) {
+            switch (state) {
+                case States::Idle:
+                case States::Compiling:
+                case States::Assembling:
+                case States::Finished:
+                case States::Error:
+                    return true;
+                default:
+                    return false;
+            }
         }
 
     private:

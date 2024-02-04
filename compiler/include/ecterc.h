@@ -2,6 +2,8 @@
 #define ECTERC_H
 
 #define ECTER_COMPILER
+
+#include "include\estate.h"
 #include <ctime>
 
 class CompilerInstance {

@@ -57,6 +57,7 @@
         "etoken.h": "c",
         "eparse.h": "c",
         "ctime": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "eerror.h": "c"
     }
 }

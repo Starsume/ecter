@@ -1,7 +1,7 @@
 GCCPARAMS=
 
 compile: 
-	g++ compiler\ecterc.c -o compiler\..\ecterc.exe
+	g++ compiler/ecterc.cpp -o compiler/../ecterc.exe
 
 compile-all-o:
 	g++ compiler/ecterc.cpp -o compiler/bin/ecterc.o

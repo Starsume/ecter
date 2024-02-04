@@ -1,1 +1,0 @@
-#define ECTER_COMPILER
