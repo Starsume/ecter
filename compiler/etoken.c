@@ -1,7 +1,7 @@
 #define ECTER_COMPILER
 
-#include "etoken.h"
-#include "eutil.h"
+#include "include\etoken.h"
+#include "include\eutil.h"
 
 #include <stdlib.h>
 #include <ctype.h>

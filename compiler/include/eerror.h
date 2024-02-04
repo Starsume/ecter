@@ -6,6 +6,10 @@
 #include "etoken.h"
 #include <stdio.h>
 
+/* Codes */
+#define OK_CODE 0
+#define ERROR_CODE 1
+
 typedef struct {
     int line;
     int character;
@@ -31,7 +35,7 @@ typedef struct {
 ErrorHandler createHandler();
 Error createError(char name*, char cause*, Position pos);
 ErrorType getErrorType(Error err);
-Error* checkForErrors()
+Error* checkForErrors();
 void reportError(Error err);
 
 #endif

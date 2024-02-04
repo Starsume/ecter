@@ -1,14 +1,20 @@
-#ifndef ECTER_H
-#define ECTER_H
+#ifndef ECTERC_H
+#define ECTERC_H
 
 #define ECTER_COMPILER
-#include <time.h>
+#include <ctime>
 
-typedef struct {
-    time_t t = time(NULL);
-    struct tm *tm = localtime(&t);
-} CompilerInstance;
+class CompilerInstance {
+    public:
+        CompilerInstance() {
+            t = time(NULL);
+            tm = localtime(&t);
+        }
 
-void stop(CompilerInstance inst);
+        time_t t;
+        struct tm *tm;
+};
+
+void stop(std::string& reason);
 
 #endif

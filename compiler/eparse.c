@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "eutil.h"
-#include "eparse.h"
+#include "include\eutil.h"
+#include "include\eparse.h"
 
 ASTNode* createNode(const char* type, const char* value, ASTNode** children, int child_num) {
     ASTNode* node = (ASTNode*)alloc(sizeof(ASTNode));

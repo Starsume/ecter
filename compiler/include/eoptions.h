@@ -3,8 +3,6 @@
 
 #define ECTER_COMPILER
 
-extern const char* ValidOptions; 
-
 typedef struct {
     int optionc = 0;
     char* options;

@@ -3,7 +3,6 @@
     "files.associations": {
         "*.c": "c",
         "stdio.h": "c",
-        "token.h": "c",
         "ctype.h": "c",
         "stdlib.h": "c",
         "bit": "c",
@@ -52,6 +51,11 @@
         "numbers": "cpp",
         "ostream": "cpp",
         "stdexcept": "cpp",
-        "streambuf": "cpp"
+        "streambuf": "cpp",
+        "emem.h": "c",
+        "eoptions.h": "c",
+        "etoken.h": "c",
+        "eparse.h": "c",
+        "ctime": "cpp"
     }
 }
