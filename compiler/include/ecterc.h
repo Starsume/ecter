@@ -3,7 +3,7 @@
 
 #define ECTER_COMPILER
 
-#include "include\estate.h"
+#include "estate.h"
 #include <ctime>
 
 class CompilerInstance {

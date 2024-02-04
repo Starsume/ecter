@@ -14,7 +14,7 @@ enum class States {
 class State {
     public:
         State() {
-            current_state = "Idle"
+            current_state = "Idle";
         }
 
         std::string getState() const;

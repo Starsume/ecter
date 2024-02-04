@@ -28,12 +28,12 @@ using namespace eas;
 
 /* Operating System defintion */
 
-#ifdef _WIN32
+#if defined(_WIN32)
     #define OS Windows
-#elif __linux__
+#elif defined(__linux__)
     #define OS Linux
-#elif __unix__
-    #define OS MAC
+#elif defined(__unix__)
+    #define OS Mac
 #endif
 
 const CompilerInstance instance = CompilerInstance();
@@ -55,7 +55,7 @@ void checkArguments(char* args[], int argc) {
     std::vector<Options> optionist(argc); 
 
     for(int z = 0; z < argc; z++) {
-        optionist[z] = createOption(args[z]); 
+        optionist[z] = Options::createOption(args[z]); 
     }
 
     for(int x = 0; x < argc; x++) {
@@ -69,13 +69,13 @@ int main(int argc, char* argv[]) {
         return ERROR_CODE;
     }
 
-    const string help_message = "Usage: ecterc.exe [options] file...
+    const string help_message = R"(Usage: ecterc.exe [options] file...
                                 Options:
                                     -h, --help      Display Help.
                                     -o, --object    Compile to object .o files.
                                     -s, --assembly  Compile to assembly.
                                     -l, --log       Enable logging. Log files are stored in APPDATA.
-                                    -v, --version   Display version.";
+                                    -v, --version   Display version.)";
 
     for (int i=1;i<argc;i++) {
         string arg = argv[i];
@@ -83,16 +83,10 @@ int main(int argc, char* argv[]) {
             cout << help_message << endl;
         } else if (arg == "-o" || arg == "--object") {
             // Process object option
-            cout << "Object option selected..." << endl;
         } else if (arg == "-s" || arg == "--assembly") {
             // Process assembly option
-            cout << "Assembly option selected..." << endl;
-        } else if (arg == "-d" || arg == "--debug") {
-            // Process debug option
-            cout << "Debug option selected..." << endl;
         } else if (arg == "-l" || arg == "--log") {
             // Process log option
-            cout << "Log option selected..." << endl;
         } else if (arg == "-v" || arg == "--version") {
             cout << ECTER_VERSION << ",Running on " << OS << endl;
         } else {

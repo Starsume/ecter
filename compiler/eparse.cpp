@@ -1,15 +1,16 @@
+#ifndef ECTER_COMPILER
 #define ECTER_COMPILER
 
-#include <stdlib.h>
-#include <string.h>
+#include <cstdlib>
+#include <cstring>
 
-#include "include\eutil.h"
-#include "include\eparse.h"
+#include "include/eutil.h"
+#include "include/eparse.h"
 
 ASTNode* createNode(const char* type, const char* value, ASTNode** children, int child_num) {
-    ASTNode* node = (ASTNode*)alloc(sizeof(ASTNode));
-    if (node == NULL) {
-        return NULL;
+    ASTNode* node = new ASTNode;
+    if (node == nullptr) {
+        return nullptr;
     }
 
     node->type = strdup(type);
@@ -21,19 +22,21 @@ ASTNode* createNode(const char* type, const char* value, ASTNode** children, int
 }
 
 void freeNode(ASTNode* node) {
-    if (node == NULL) {
+    if (node == nullptr) {
         return;
     }
 
     free(node->type);
     free(node->value);
 
-    if (node->children != NULL) {
-        for (int i=0;i<child_num;i++) {
+    if (node->children != nullptr) {
+        for (int i = 0; i < node->child_num; i++) {
             freeNode(node->children[i]);
         }
-        free(node->children);
+        delete[] node->children;
     }
     
-    free(node);
+    delete node;
 }
+
+#endif 

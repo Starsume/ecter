@@ -2,6 +2,7 @@
 
 #include "etoken.h"
 #include <cstdlib>
+#include <vector>
 #include <cstring>
 #include <cctype>
 
@@ -166,4 +167,17 @@ Token* Tokenizer::getNextToken() {
     }
 
     return new Token(None, "");
+}
+
+std::vector<Token*> tokenM(const std::string code) {
+    std::vector<Token*> tokens;
+
+    Tokenizer tokenizer(code);
+
+    Token* token;
+    while((token = tokenizer.getNextToken()) != nullptr) {
+        tokens.push_back(token);
+    }
+
+    return tokens;
 }
