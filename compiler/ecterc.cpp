@@ -28,12 +28,14 @@ using namespace eas;
 
 /* Operating System defintion */
 
-#if defined(_WIN32)
-    #define OS Windows
+#if defined(__WIN32__) || defined(_WIN32)
+    #define OS "Windows"
 #elif defined(__linux__)
-    #define OS Linux
-#elif defined(__unix__)
-    #define OS Mac
+    #define OS "Linux"
+#elif defined(__APPLE__) && defined(__MACH__)
+    #define OS "Mac OS X"
+#else
+    #define OS "Unknown"
 #endif
 
 const CompilerInstance instance = CompilerInstance();
@@ -52,14 +54,16 @@ void stop(std::string& reason) {
 }
 
 void checkArguments(char* args[], int argc) {
-    std::vector<Options> optionist(argc); 
+    std::vector<Options> optionList(argc); 
+    const char* opt;
 
     for(int z = 0; z < argc; z++) {
-        optionist[z] = Options::createOption(args[z]); 
+        opt = args[z];
+        optionList[z] = Options::createOption(opt); 
     }
 
     for(int x = 0; x < argc; x++) {
-        validateOption(optionist[x]); 
+        validateOption(optionList[x], ValidOptions); 
     }
 }
 
@@ -70,12 +74,12 @@ int main(int argc, char* argv[]) {
     }
 
     const string help_message = R"(Usage: ecterc.exe [options] file...
-                                Options:
-                                    -h, --help      Display Help.
-                                    -o, --object    Compile to object .o files.
-                                    -s, --assembly  Compile to assembly.
-                                    -l, --log       Enable logging. Log files are stored in APPDATA.
-                                    -v, --version   Display version.)";
+                                    Options:
+                                        -h, --help      Display Help.
+                                        -o, --object    Compile to object .o files.
+                                        -s, --assembly  Compile to assembly.
+                                        -l, --log       Enable logging. Log files are stored in APPDATA.
+                                        -v, --version   Display version.)";
 
     for (int i=1;i<argc;i++) {
         string arg = argv[i];
@@ -88,7 +92,7 @@ int main(int argc, char* argv[]) {
         } else if (arg == "-l" || arg == "--log") {
             // Process log option
         } else if (arg == "-v" || arg == "--version") {
-            cout << ECTER_VERSION << ",Running on " << OS << endl;
+            cout << ECTER_VERSION << ", running on " << OS << endl;
         } else {
             cout << "Invalid option: " << arg << endl;
             return 1;

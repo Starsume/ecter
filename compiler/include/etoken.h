@@ -3,6 +3,7 @@
 
 #define ECTER_COMPILER
 
+#include "eerror.h"
 #include <cstddef>
 #include <string>
 
@@ -21,14 +22,6 @@ enum TokenType {
     LParenth,
     Comment,
     None
-};
-
-class Position {
-    public:
-        Position() {
-            int row;
-            int column;
-        }
 };
 
 class Token {

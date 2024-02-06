@@ -11,9 +11,9 @@
 #define ERROR_CODE 1
 
 class Position {
-public:
-    int line;
-    int character;
+    public:
+        int line;
+        int character;
 };
 
 enum ErrorType {

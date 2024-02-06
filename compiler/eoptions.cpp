@@ -6,16 +6,14 @@
 #include <vector>
 #include "include\eoptions.h"
 
-Options createOption(const char* option) {
+static Options createOption(const char* option) {
     Options opt;
     opt.options.push_back(option);
     opt.optionc = 1; 
     return opt;
 }
 
-bool validateOption(Options option) {
-    std::vector<std::string> ValidOptions = {"option1", "option2", "option3"}; // Replace with your actual list of valid options
-
+bool validateOption(Options option, char* optionlist) {
     for (const auto& opt : option.options) {
         bool valid = false;
         for (const auto& validOpt : ValidOptions) {
