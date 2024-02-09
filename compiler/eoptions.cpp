@@ -7,27 +7,26 @@
 #include "include\eoptions.h"
 
 static Options createOption(const char* option) {
-    Options opt;
-    opt.options.push_back(option);
-    opt.optionc = 1; 
-    return opt;
+    std::vector<std::string> optionsVector;
+    std::string optionStr(option);
+    optionsVector.push_back(optionStr);
+    return Options(optionsVector, optionStr.size());
 }
 
-bool validateOption(Options option, char* optionlist) {
-    for (const auto& opt : option.options) {
-        bool valid = false;
-        for (const auto& validOpt : ValidOptions) {
-            if (opt == validOpt) {
-                valid = true;
+bool validateOption(Options option, const char** validoptions) {
+    for (int i = 0; i < option.optionc; ++i) {
+        bool found = false;
+        for (int j = 0; validoptions[j] != nullptr; ++j) {
+            if (option.options[i] == validoptions[j]) {
+                found = true;
                 break;
             }
         }
-        if (!valid) {
+        if (!found) {
             return false;
         }
     }
     return true;
 }
-
 
 #endif

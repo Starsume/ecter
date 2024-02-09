@@ -33,7 +33,7 @@ using namespace eas;
 #elif defined(__linux__)
     #define OS "Linux"
 #elif defined(__APPLE__) && defined(__MACH__)
-    #define OS "Mac OS X"
+    #define OS "Mac OS"
 #else
     #define OS "Unknown"
 #endif
