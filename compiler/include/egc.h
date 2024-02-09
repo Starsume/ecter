@@ -4,7 +4,9 @@
 #include <iostream>
 
 namespace egc {
-    
+    class BCGenerator {
+        
+    };
 }
 
 #endif

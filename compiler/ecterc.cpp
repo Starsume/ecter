@@ -25,6 +25,7 @@
 
 using namespace std;
 using namespace eas;
+using namespace egc;
 
 /* Operating System defintion */
 
@@ -49,7 +50,7 @@ const char* ValidOptions[] = {
     "-v", "--version"
 };
 
-void stop(std::string& reason) {
+void stop() {
     exit(1);
 }
 
@@ -81,7 +82,7 @@ int main(int argc, char* argv[]) {
                                         -l, --log       Enable logging. Log files are stored in APPDATA.
                                         -v, --version   Display version.)";
 
-    for (int i=1;i<argc;i++) {
+    for (int i=1; i<argc ; ++i) {
         string arg = argv[i];
         if (arg == "-h" || arg == "--help") {
             cout << help_message << endl;

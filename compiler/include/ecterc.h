@@ -17,6 +17,6 @@ class CompilerInstance {
         struct tm *tm;
 };
 
-void stop(std::string& reason);
+void stop();
 
 #endif
