@@ -4,7 +4,6 @@
 #include <fstream>
 #include <string>
 #include <vector>
-
 #include "include\emem.h"
 #include "include\eerror.h"
 #include "include\estate.h"
@@ -25,7 +24,6 @@
 
 using namespace std;
 using namespace eas;
-using namespace egc;
 
 /* Operating System defintion */
 
@@ -41,6 +39,8 @@ using namespace egc;
 
 const CompilerInstance instance = CompilerInstance();
 
+const SymbolTable table;
+
 const char* ValidOptions[] = {
     "-h", "--help",
     "-o", "--object",
@@ -51,21 +51,21 @@ const char* ValidOptions[] = {
 };
 
 void addEntries() {
-    SymbolTable::addEntry("mov");
-    SymbolTable::addEntry("add");
-    SymbolTable::addEntry("push");
-    SymbolTable::addEntry("jmp");
-    SymbolTable::addEntry("call");
-    SymbolTable::addEntry("hlt");
-    SymbolTable::addEntry("bits");
-    SymbolTable::addEntry("extern");
-    SymbolTable::addEntry("section");
-    SymbolTable::addEntry("global");
-    SymbolTable::addEntry("equ");
-    SymbolTable::addEntry("int");
-    SymbolTable::addEntry("syscall");
-    SymbolTable::addEntry("xor");
-    SymbolTable::addEntry("ret");
+    table.addEntry("mov");
+    table.addEntry("add");
+    table.addEntry("push");
+    table.addEntry("jmp");
+    table.addEntry("call");
+    table.addEntry("hlt");
+    table.addEntry("bits");
+    table.addEntry("extern");
+    table.addEntry("section");
+    table.addEntry("global");
+    table.addEntry("equ");
+    table.addEntry("int");
+    table.addEntry("syscall");
+    table.addEntry("xor");
+    table.addEntry("ret");
 }
 
 void stop() {
@@ -96,6 +96,7 @@ int main(int argc, char* argv[]) {
 
     const string help_message = R"(Usage: ecterc.exe [options] file...
                                     Options:
+                                        -c              Input file.
                                         -h, --help      Display Help.
                                         -o, --object    Compile to object .o files.
                                         -s, --assembly  Compile to assembly.
@@ -106,6 +107,8 @@ int main(int argc, char* argv[]) {
         string arg = argv[i];
         if (arg == "-h" || arg == "--help") {
             cout << help_message << endl;
+        } else if (arg == "-c") {
+            const std::fstream input = file(argv[i+1]);
         } else if (arg == "-o" || arg == "--object") {
             // Process object option
         } else if (arg == "-s" || arg == "--assembly") {

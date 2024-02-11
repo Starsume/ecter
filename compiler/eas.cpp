@@ -24,15 +24,15 @@ void Assembler::generateNodeAssembly(ASTNode* node, std::ofstream& outfile) {
     }
 
     if (strcmp(node->type, "ValueNode") == 0) {
-        outFile << "PUSH " << node->value << std::endl;
+        outFile << "push " << node->value << std::endl;
     } else if (strcmp(node->type, "AdditionNode") == 0) {
         generateNodeAssembly(node->children[0], outFile);
         generateNodeAssembly(node->children[1], outFile);
-        outFile << "ADD" << std::endl;
+        outFile << "add" << std::endl;
     } else if (strcmp(node->type, "MultiplicationNode") == 0) {
         generateNodeAssembly(node->children[0], outFile);
         generateNodeAssembly(node->children[1], outFile);
-        outFile << "MUL" << std::endl;
+        outFile << "mul" << std::endl;
     } else {
         std::cerr << "Unknown node type: " << node->type << std::endl;
     }

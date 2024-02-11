@@ -1,6 +1,3 @@
-#ifndef EOPTIONS_H
-#define EOPTIONS_H
-
 #define ECTER_COMPILER
 
 #include <vector>
@@ -28,5 +25,3 @@ bool validateOption(Options option, const char** validoptions) {
     }
     return true;
 }
-
-#endif
