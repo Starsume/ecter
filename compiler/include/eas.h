@@ -17,7 +17,7 @@ namespace eas {
 
     class SymbolTable {
         public:
-            void addEntry(const std::string& name, int value);
+            void addEntry(const std::string& name;
             bool getSymbol(const std::string& name, int& value) const;
         private:
             std::unordered_map<std::string, int> table;

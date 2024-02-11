@@ -50,6 +50,24 @@ const char* ValidOptions[] = {
     "-v", "--version"
 };
 
+void addEntries() {
+    SymbolTable::addEntry("mov");
+    SymbolTable::addEntry("add");
+    SymbolTable::addEntry("push");
+    SymbolTable::addEntry("jmp");
+    SymbolTable::addEntry("call");
+    SymbolTable::addEntry("hlt");
+    SymbolTable::addEntry("bits");
+    SymbolTable::addEntry("extern");
+    SymbolTable::addEntry("section");
+    SymbolTable::addEntry("global");
+    SymbolTable::addEntry("equ");
+    SymbolTable::addEntry("int");
+    SymbolTable::addEntry("syscall");
+    SymbolTable::addEntry("xor");
+    SymbolTable::addEntry("ret");
+}
+
 void stop() {
     exit(1);
 }
@@ -57,6 +75,8 @@ void stop() {
 void checkArguments(char* args[], int argc) {
     std::vector<Options> optionList(argc); 
     const char* opt;
+
+    addEntries();
 
     for(int z = 0; z < argc; z++) {
         opt = args[z];

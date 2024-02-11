@@ -38,7 +38,7 @@ void Assembler::generateNodeAssembly(ASTNode* node, std::ofstream& outfile) {
     }
 }
 
-void SymbolTable::addEntry(const std::string& name, int value) {
+void SymbolTable::addEntry(const std::string& name) {
     table[name] = value;
 }
 
