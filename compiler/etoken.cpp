@@ -1,11 +1,12 @@
 #define ECTER_COMPILER
 
-#include "compiler/etoken.h"
+#include "include/etoken.h"
 #include <cstdlib>
 #include <vector>
 #include <cstring>
 #include <cctype>
 #include <iostream>
+#include <regex>
 
 char Tokenizer::currentChar() {
     if (input[position] != '\0') {
@@ -26,27 +27,28 @@ void Tokenizer::skipWhitespace() {
 }
 
 Token* Tokenizer::extractNumericLiteral() {
-    char num[50];
-    size_t index = 0;
-    while (isdigit(currentChar())) {
-        num[index++] = currentChar();
-        advance();
+    std::regex numericRegex("[0-9]+");
+    std::smatch match;
+    std::string num;
+
+    while (std::regex_search(input + position, match, numericRegex)) {
+        num = match.str();
+        position += num.length();
+        return new Token(NumericLiteral, num.c_str());
     }
-    num[index] = '\0';
-    return new Token(NumericLiteral, num);
+
+    return nullptr;
 }
 
 Token* Tokenizer::extractTextLiteral() {
-    char text[100];
-    size_t index = 0;
     advance();
+    std::string text;
     while (currentChar() != '"' && currentChar() != '\0') {
-        text[index++] = currentChar();
+        text += currentChar();
         advance();
     }
-    text[index] = '\0';
     advance();
-    return new Token(TextLiteral, text);
+    return new Token(TextLiteral, text.c_str());
 }
 
 Token* Tokenizer::extractOperator() {
@@ -56,16 +58,18 @@ Token* Tokenizer::extractOperator() {
 }
 
 Token* Tokenizer::extractKeywordOrIdentifier() {
-    size_t index = position;
-    while (isalnum(currentChar()) || currentChar() == '_') {
-        advance();
-    }
-    char* word = new char[position - index + 1];
-    strncpy(word, input + index, position - index);
-    word[position - index] = '\0';
-    TokenType type = isKeyword(word) ? Keyword : Identifier;
+    std::regex wordRegex("[a-zA-Z_][a-zA-Z0-9_]*");
+    std::smatch match;
+    std::string word;
 
-    return new Token(type, word);
+    if (std::regex_search(input + position, match, wordRegex)) {
+        word = match.str();
+        position += word.length();
+        TokenType type = isKeyword(word.c_str()) ? Keyword : Identifier;
+        return new Token(type, word.c_str());
+    }
+
+    return nullptr;
 }
 
 Token* Tokenizer::getNextToken() {
@@ -142,20 +146,4 @@ std::vector<Token*> tokenM(const std::string code) {
     }
 
     return tokens;
-}
-
-int main() {
-    std::string code = "int ut = 10";
-    std::vector<Token*> tokens = tokenM(code);
-
-    for (Token* token : tokens) {
-        std::cout << token->getValue() << " ";
-    }
-    std::cout << std::endl;
-
-    for (Token* token : tokens) {
-        delete token;
-    }
-    
-    return 0;
 }

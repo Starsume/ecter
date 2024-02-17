@@ -4,21 +4,23 @@
 #define ECTER_COMPILER
 
 #include <vector>
+#include <iostream>
 #include <string>
 
-class Options {
+class Option {
     public:
-        std::vector<std::string> options;
+        std::string option;
         int optionc;
 
-        Options(std::vector<std::string> x, int y) {
-            options = x;
-            optionc = y;
+        Option() : option(""), optionc(0) {}
+
+        Option(std::string x) {
+            option = x;
         }
 
-        static Options createOption(const char* option);
+        static Option createOption(const char* option);
 };
 
-bool validateOption(Options option, const char** validoptions);
+bool validateOption(Option opt, const char** validoptions);
 
 #endif

@@ -2,6 +2,7 @@
 #define EAS_H
 
 #include "eparse.h" 
+#include <iostream>
 #include <fstream>
 #include <unordered_map>
 #include <string>

@@ -15,10 +15,10 @@ void Assembler::generateAssembly(ASTNode* root, const std::string& filename) {
         generateNodeAssembly(root, outFile);
     }
 
-    outfile.close();
+    outFile.close();
 }
 
-void Assembler::generateNodeAssembly(ASTNode* node, std::ofstream& outfile) {
+void Assembler::generateNodeAssembly(ASTNode* node, std::ofstream& outFile) {
     if (node == nullptr) {
         return;
     }
