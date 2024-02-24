@@ -26,20 +26,6 @@ void Tokenizer::skipWhitespace() {
     }
 }
 
-Token* Tokenizer::extractNumericLiteral() {
-    std::regex numericRegex("[0-9]+");
-    std::smatch match;
-    std::string num;
-
-    while (std::regex_search(input + position, match, numericRegex)) {
-        num = match.str();
-        position += num.length();
-        return new Token(NumericLiteral, num.c_str());
-    }
-
-    return nullptr;
-}
-
 Token* Tokenizer::extractTextLiteral() {
     advance();
     std::string text;
@@ -62,7 +48,9 @@ Token* Tokenizer::extractKeywordOrIdentifier() {
     std::smatch match;
     std::string word;
 
-    if (std::regex_search(input + position, match, wordRegex)) {
+    std::string inputSubstring = input.substr(position);
+
+    if (std::regex_search(inputSubstring, match, wordRegex)) {
         word = match.str();
         position += word.length();
         TokenType type = isKeyword(word.c_str()) ? Keyword : Identifier;
@@ -71,6 +59,23 @@ Token* Tokenizer::extractKeywordOrIdentifier() {
 
     return nullptr;
 }
+
+
+Token* Tokenizer::extractNumericLiteral() {
+    std::regex numericRegex("[0-9]+");
+    std::smatch match;
+    std::string num;
+
+    std::string inputSubstring = input.substr(position);
+
+    if (std::regex_search(inputSubstring, match, numericRegex)) {
+        num = match.str();
+        position += num.length(); // Update position
+        return new Token(NumericLiteral, num.c_str());
+    }
+    return nullptr;
+}
+
 
 Token* Tokenizer::getNextToken() {
     while (currentChar() != '\0') {
@@ -138,7 +143,8 @@ Token* Tokenizer::getNextToken() {
 std::vector<Token*> tokenM(const std::string code) {
     std::vector<Token*> tokens;
 
-    Tokenizer tokenizer(code.c_str());
+    std::string mutableCode = code;
+    Tokenizer tokenizer(&mutableCode[0]);
 
     Token* token;
     while((token = tokenizer.getNextToken()) != nullptr) {
@@ -146,4 +152,34 @@ std::vector<Token*> tokenM(const std::string code) {
     }
 
     return tokens;
+}
+
+int main(int argc, char *argv[]) {
+    if (argc < 2) {
+        std::cerr << "Usage: " << argv[0] << " <input_string>" << std::endl;
+        return 1;
+    }
+
+    std::string g;
+    for(int i=1;i<argc;++i) {
+        g += argv[i];
+    }
+
+    std::vector<Token*> rawTokens = tokenM(g);
+    std::vector<std::unique_ptr<Token>> tokens;
+
+    for (auto* rawToken : rawTokens) {
+        tokens.push_back(std::unique_ptr<Token>(rawToken));
+    }
+
+    for (const auto& token : tokens) {
+        std::cout << token->value << " ";
+    }
+    std::cout << std::endl;
+
+    for (auto token : tokens) {
+        delete token;
+    }
+
+    return 0;
 }

@@ -3,8 +3,11 @@
 
 #define ECTER_COMPILER
 
-#include "eerror.h"
 #include <cstddef>
+#include <iostream>
+#include <regex>
+#include <cstring>
+#include <unordered_set>
 #include <string>
 
 enum TokenType {
@@ -26,29 +29,29 @@ enum TokenType {
 
 class Token {
     public:
-        Token(TokenType t, const char* v) : type(t) {
-            TokenType type;
-            char* value;
-        }
-
+        Token(TokenType t, const char* v) : type(t), value(strdup(v)) {}
         TokenType type;
         char* value;
-
         ~Token() {
             free(value);
         }
 };
 
-int isKeyword(const char* word);
+int isKeyword(const char* word) {
+    static const std::unordered_set<std::string> keywords = {
+        "if", "else", "while", "else if", "accesible", "internal", "static", "const"
+    };
+    return keywords.find(word) != keywords.end();
+}
 
 class Tokenizer {
     private:
-        char* input;
+        std::string input;
         size_t position;
 
     public:
-        Tokenizer(const char* input);
-        ~Tokenizer();
+        Tokenizer(const std::string& input) : input(input), position(0) {}
+        ~Tokenizer() {}
         char currentChar();
         void advance();
         void skipWhitespace();

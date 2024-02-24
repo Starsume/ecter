@@ -1,6 +1,8 @@
 #ifndef ESTATE_H
 #define ESTATE_H
 
+#include <iostream>
+
 #define ECTER_COMPILER
 
 enum class States {
@@ -13,6 +15,7 @@ enum class States {
 
 class State {
     public:
+        std::string current_state;
         State() {
             current_state = "Idle";
         }

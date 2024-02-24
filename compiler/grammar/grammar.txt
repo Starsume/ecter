@@ -5,7 +5,7 @@ statement         ::= import_statement
                     | variable_declaration
                     | class_declaration
                     | lambda_function
-                    | main_function
+                    | main_entrypoint
 
 import_statement  ::= "@import" "(" import_file ")" 
 
@@ -23,7 +23,7 @@ block             ::= "{" statement* "}"
 
 variable_declaration ::= type variable_name ("=" value)?
 
-class_declaration ::= class_modifier? "class" class_name ("extends" parent_class_name)? block
+class_declaration ::= class_modifier? "class" class_name ("::" parent_class_name)? block
 
 class_modifier    ::= "accessible" | "internal" | "abstract" | "protected"
 
@@ -43,7 +43,7 @@ lambda_function   ::= "function" lambda_signature "=>" type
 
 lambda_signature  ::= "(" parameters ")"
 
-main_function     ::= "function" "main" "(" ")" "->" "int" block
+main_entrypoint     ::= "function" "main" "(" ")" block
 
 import_file       ::= identifier ( "." identifier )*
 

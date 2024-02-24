@@ -38,11 +38,11 @@ abstract class Engine() { -- abstract class
 
 }
 
-function size(T object) -> int { -- lambda function
+function size(T object) returns int { -- lambda function
 
 }
 
-function main() -> int { -- returns int
+function main() returns int { -- returns int
     return 0
 }
 

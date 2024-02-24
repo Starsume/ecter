@@ -4,7 +4,7 @@ using namespace eas;
 
 #define ECTER_COMPILER
 
-void Assembler::generateAssembly(ASTNode* root, const std::string& filename) {
+void Assembler::generateAssembly(ASTNode* root, const std::string& filename, SymbolTable& symbolTable) {
     std::ofstream outFile(filename);
     if (!outFile) {
         std::cerr << "Error opening file: " << filename << std::endl;
@@ -12,13 +12,13 @@ void Assembler::generateAssembly(ASTNode* root, const std::string& filename) {
     }
 
     if (root != nullptr) {
-        generateNodeAssembly(root, outFile);
+        generateNodeAssembly(root, outFile, symbolTable);
     }
 
     outFile.close();
 }
 
-void Assembler::generateNodeAssembly(ASTNode* node, std::ofstream& outFile) {
+void Assembler::generateNodeAssembly(ASTNode* node, std::ofstream& outFile, SymbolTable& symbolTable) {
     if (node == nullptr) {
         return;
     }
